@@ -1,0 +1,13 @@
+[project]
+name = "taskrecorder"
+version = "0.1.0"
+description = "Record what you've been working on and report on it"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+wl = "taskrecorder.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

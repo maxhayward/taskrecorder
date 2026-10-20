@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Work log</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Work log</h1>
+      <div id="timer" class="timer" hidden>
+        <span class="pulse" aria-hidden="true"></span>
+        <span id="timer-label"></span>
+        <button id="timer-stop" type="button">Stop</button>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div class="range">
+        <button type="button" id="prev" class="icon" aria-label="Previous period">‹</button>
+        <div class="seg" id="presets" role="group" aria-label="Date range">
+          <button type="button" data-preset="today">Today</button>
+          <button type="button" data-preset="week">Week</button>
+          <button type="button" data-preset="month">Month</button>
+          <button type="button" data-preset="30d">30 days</button>
+          <button type="button" data-preset="custom">Custom</button>
+        </div>
+        <button type="button" id="next" class="icon" aria-label="Next period">›</button>
+        <span id="range-label" class="range-label"></span>
+        <span id="custom" class="custom" hidden>
+          <input type="date" id="since" aria-label="From" /> –
+          <input type="date" id="until" aria-label="To" />
+        </span>
+      </div>
+      <div class="seg" id="groupby" role="group" aria-label="Group by">
+        <button type="button" data-group="tag">By tag</button>
+        <button type="button" data-group="task">By task</button>
+      </div>
+    </div>
+
+    <main class="layout">
+      <section class="insights">
+        <div class="kpis" id="kpis"></div>
+        <div class="card">
+          <h2 id="chart-title">Time per day</h2>
+          <div id="legend" class="legend"></div>
+          <div id="chart" class="chart"></div>
+        </div>
+        <div class="card">
+          <h2>Breakdown</h2>
+          <p class="hint">Click a row to filter the entries list.</p>
+          <ol id="breakdown" class="breakdown"></ol>
+        </div>
+      </section>
+
+      <aside class="side">
+        <form id="form" class="card form" autocomplete="off">
+          <h2 id="form-title">Add entry</h2>
+          <label class="wide">Task
+            <input name="task" list="task-list" required placeholder="What did you work on?" />
+          </label>
+          <label>Tag
+            <input name="tag" list="tag-list" placeholder="optional" />
+          </label>
+          <label>Duration
+            <input name="duration" placeholder="45m, 1h30m, 1:30" />
+          </label>
+          <label>Date
+            <input name="date" type="date" required />
+          </label>
+          <label>Start
+            <input name="time" type="time" />
+          </label>
+          <p class="hint wide" id="form-hint">Leave start blank and it's assumed to have just finished.</p>
+          <p class="error wide" id="form-error" role="alert" hidden></p>
+          <div class="actions wide">
+            <button type="submit" class="primary" id="save">Add</button>
+            <button type="button" id="start-timer">Start timer</button>
+            <button type="button" id="cancel" hidden>Cancel</button>
+            <button type="button" id="delete" class="danger" hidden>Delete</button>
+          </div>
+          <datalist id="task-list"></datalist>
+          <datalist id="tag-list"></datalist>
+        </form>
+
+        <div class="card">
+          <h2>Entries <span id="focus" class="focus" hidden></span></h2>
+          <div id="entries"></div>
+        </div>
+      </aside>
+    </main>
+
+    <div id="tooltip" class="tooltip" role="status" hidden></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
